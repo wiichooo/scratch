@@ -6,10 +6,10 @@ import Navbar from "react-bootstrap/Navbar";
 import Nav from "react-bootstrap/Nav";
 
 export default function AppNavbar({ user }) {
-  const navbarStyle = { marginBottom: "25px" };
+  const navbarStyle = { marginBottom: "25px"};
   return (
-    <Navbar bg="light" expand="lg" style={navbarStyle}>
-      <Container>
+    <Navbar bg="dark" variant="dark" expand="lg" style={navbarStyle}>
+      
         <Navbar.Brand>
           <Link href="/">
             <a>Thoughts!</a>
@@ -32,13 +32,18 @@ export default function AppNavbar({ user }) {
               </>
             )}
             {!user && (
+              <>
               <Link href="/login">
                 <a className="nav-link">Log In</a>
               </Link>
+
+            <Link href="/map">
+               <a className="nav-link">Map</a>
+            </Link>
+              </>
             )}
           </Nav>
         </Navbar.Collapse>
-      </Container>
     </Navbar>
   );
 }

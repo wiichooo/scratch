@@ -1,5 +1,3 @@
-// ./src/pages/profile.js
-
 import styled from "styled-components";
 
 const Picture = styled.img`

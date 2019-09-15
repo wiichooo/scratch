@@ -1,11 +1,11 @@
-// ./src/pages/_app.js
 
 import React from "react";
 import App, { Container as NextContainer } from "next/app";
 import Head from "next/head";
-import Container from "react-bootstrap/Container";
 import Jumbotron from "react-bootstrap/Jumbotron";
 import Navbar from "../components/Navbar";
+import "react-datepicker/dist/react-datepicker.css";
+
 
 class MyApp extends App {
   static async getInitialProps({ Component, ctx }) {
@@ -37,14 +37,12 @@ class MyApp extends App {
     return (
       <NextContainer>
         <Head>
-          <title>Thoughts!</title>
+          <title>Travel Thoughts!</title>
         </Head>
         <Navbar user={this.state.user} />
-        <Container>
           <Jumbotron>
             <Component {...props} />
           </Jumbotron>
-        </Container>
       </NextContainer>
     );
   }

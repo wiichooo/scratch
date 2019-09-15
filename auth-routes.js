@@ -1,5 +1,3 @@
-// ./src/auth-routes.js
-
 const express = require("express");
 const passport = require("passport");
 
@@ -10,7 +8,7 @@ router.get("/login", passport.authenticate("auth0", {
 }), (req, res) => res.redirect("/"));
 
 router.get("/callback", (req, res, next) => {
-  passport.authenticate("auth0",  (err, user) => {
+  passport.authenticate("auth0", (err, user) => {
     if (err) return next(err);
     if (!user) return res.redirect("/login");
     req.logIn(user, (err) => {
@@ -23,7 +21,11 @@ router.get("/callback", (req, res, next) => {
 router.get("/logout", (req, res) => {
   req.logout();
 
-  const {AUTH0_DOMAIN, AUTH0_CLIENT_ID, BASE_URL} = process.env;
+  const {
+    AUTH0_DOMAIN,
+    AUTH0_CLIENT_ID,
+    BASE_URL
+  } = process.env;
   res.redirect(`https://${AUTH0_DOMAIN}/logout?client_id=${AUTH0_CLIENT_ID}&returnTo=${BASE_URL}`);
 });
 
