@@ -128,4 +128,14 @@ router.post("/api/visited", (req, res) => {
   });
 });
 
+//coutnry info
+router.get("/api/country/:id", (req, res) => {
+  console.log('asd')
+  console.log(req.params.id)
+  fetch(`https://restcountries.eu/rest/v1/name/${req.params.id}`, (req,res) => {
+                res.send(res)
+            }
+        );
+});
+
 module.exports = router;

@@ -5,7 +5,7 @@ import Map from "../components/MapView";
 
 function MapV(props) {
   return (
-    <Container>
+    <Container className='maincontainer'>
       <Map visited={props.visited} />
     </Container>
   );

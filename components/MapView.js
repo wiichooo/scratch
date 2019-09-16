@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-
 import {Button, Form, Col, Row, InputGroup, FormControl} from 'react-bootstrap';
 import Thought from "./Thought";
 import DataForm from "./DataForm"
@@ -14,7 +13,9 @@ class map extends Component {
       name: '',
       visited: [],
       data: [],
-      map: false
+      map: false,
+      info: null,
+      selected: null
     };
     this.changeSelected = this.changeSelected.bind(this)
     this.setVisited = this.setVisited.bind(this)
@@ -171,12 +172,26 @@ class map extends Component {
   };
 
   changeSelected(id, name) {
-    this.setState({
-      id: id,
-      name: name,
-      map: false
-    })
-    console.log(this.state)
+    console.log(this.state.data.find(function(element) {
+      return element.id==id;
+    }))
+    fetch(`https://restcountries.eu/rest/v2/alpha/${id}`)
+        .then(res => res.json())
+        .then((data) => {
+            //this.setState({ data: data })
+            this.setState({
+              id: id,
+              name: name,
+              selected: this.state.data.find(function(element) {
+                return element.id==id;
+              }),
+              map: false,
+              info: data
+            })
+        })
+        .catch(console.log)
+    
+   // console.log(this.state)
 
   };
 
@@ -261,15 +276,20 @@ class map extends Component {
 
   render() {
      // var polygonSeries;
-     
+     console.log('render 2')
+     console.log(this.state.selected)
     return (
       <Col>
         <Row>
           <div id="chartdiv" style={{ width: "100%", height: "500px", backgroundColor:'white' }}></div>
         </Row>
-        <Row>
-          {this.state.id ? <DataForm id={this.state.id} name={this.state.name} onChange={this.setVisited}/>:null}
-          {this.state.id ? <CountryInfo id={this.state.id} name={this.state.name} onChange={this.setVisited}/>:null}
+        <Row className='cardscontainer'>
+          {this.state.id ? 
+          <>
+            <DataForm id={this.state.id} name={this.state.name} selected={this.state.selected} onChange={this.setVisited}/>
+            <CountryInfo id={this.state.id} name={this.state.name} data={this.state.info} onChange={this.setVisited}/>
+          </>
+          :null}
         </Row>
       </Col>
     );

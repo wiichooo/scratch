@@ -1,5 +1,3 @@
-// ./src/components/Thought.js
-
 import Card from "react-bootstrap/Card"
 
 export default function Thought({ thought }) {

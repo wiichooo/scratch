@@ -5,7 +5,7 @@ import Head from "next/head";
 import Jumbotron from "react-bootstrap/Jumbotron";
 import Navbar from "../components/Navbar";
 import "react-datepicker/dist/react-datepicker.css";
-
+import "../styles/styles.less"
 
 class MyApp extends App {
   static async getInitialProps({ Component, ctx }) {
