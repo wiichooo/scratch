@@ -9,6 +9,7 @@ const Auth0Strategy = require("passport-auth0");
 const uid = require('uid-safe');
 const authRoutes = require("./auth-routes");
 const thoughtsAPI = require("./api");
+const dbserver = require("./dbserver")
 
 const dev = process.env.NODE_ENV !== "production";
 const app = next({
@@ -66,6 +67,9 @@ app.prepare().then(() => {
 
   // handling everything else with Next.js
   server.get("*", handle);
+
+  //dbserver
+  server.use(dbserver);
 
   http.createServer(server).listen(process.env.PORT, () => {
     console.log(`listening on port ${process.env.PORT}`);
