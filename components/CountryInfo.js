@@ -33,7 +33,7 @@ class CountryInfo extends Component {
         <Container>
             {this.state.data.languages?
             <Col>
-            <Card bg="info" text="white">
+            <Card text="white" className='card-color'>
             <Card.Img variant="top" src={this.state.data.flag} style={{height: '215px'}} />
             <Card.Body>
                 <Card.Title>{this.state.name}</Card.Title>
@@ -43,11 +43,11 @@ class CountryInfo extends Component {
                  <br></br>
                  Region:  {this.state.data.region} / {this.state.data.subregion}
                 </Card.Text>
-                <Card.Header>Info</Card.Header>
+                <Card.Header>Information</Card.Header>
                 <ListGroup variant="flush">
-                    <ListGroup.Item>Currency: {this.state.data.currencies[0].name + " (" + this.state.data.currencies[0].code +")"} </ListGroup.Item>
-                    <ListGroup.Item>Language: {this.state.data.languages[0].name + " (" + this.state.data.languages[0].iso639_1 +")"   }</ListGroup.Item>
-                    <ListGroup.Item>Calling Codes: {this.state.data.callingCodes.join()}</ListGroup.Item>
+                    <ListGroup.Item className='card-color'>Currency: {this.state.data.currencies[0].name + " (" + this.state.data.currencies[0].code +")"} </ListGroup.Item>
+                    <ListGroup.Item className='card-color'>Language: {this.state.data.languages[0].name + " (" + this.state.data.languages[0].iso639_1 +")"   }</ListGroup.Item>
+                    <ListGroup.Item className='card-color'>Calling Codes: {this.state.data.callingCodes.join()}</ListGroup.Item>
                 </ListGroup>
                 {/* <Button variant="primary">Go somewhere</Button> */}
             </Card.Body>

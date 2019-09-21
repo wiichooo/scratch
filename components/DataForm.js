@@ -84,7 +84,7 @@ class DataForm extends Component {
             
         <Container>
             <Col>
-            <Card border="primary">
+            <Card border="primary" className='card-color'>
                 <Card.Header>Selected</Card.Header>
                 <Card.Body>
                 <Card.Title>Your info</Card.Title>

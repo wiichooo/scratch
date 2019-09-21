@@ -37,7 +37,7 @@ export default class MyDocument extends Document {
           <script src="https://www.amcharts.com/lib/4/geodata/worldLow.js"></script>
           <script src="https://www.amcharts.com/lib/4/themes/animated.js"></script>
         </Head>
-        <body>
+        <body className='whiteBackground'>
           <Main />
           <NextScript />
         </body>

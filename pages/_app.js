@@ -5,6 +5,7 @@ import Jumbotron from "react-bootstrap/Jumbotron";
 import Navbar from "../components/Navbar";
 import "react-datepicker/dist/react-datepicker.css";
 import "../styles/styles.less"
+import Footer from "../components/Footer";
 
 class MyApp extends App {
   static async getInitialProps({ Component, ctx }) {
@@ -39,9 +40,10 @@ class MyApp extends App {
           <title>Travel Thoughts!</title>
         </Head>
         <Navbar user={this.state.user} />
-          <Jumbotron>
+          <Jumbotron className='whiteBackground paddingBottom'>
             <Component {...props} />
           </Jumbotron>
+        <Footer/>
       </NextContainer>
     );
   }

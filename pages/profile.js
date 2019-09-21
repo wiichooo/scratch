@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import {Form, Button, Card, Container, Jumbotron} from "react-bootstrap";
 
 const Picture = styled.img`
   border-radius: 50%;
@@ -8,7 +9,8 @@ const Picture = styled.img`
 
 function Profile({ user }) {
   return (
-    <div>
+    <Container>
+    <Jumbotron className='whiteText card-color'>
       <h2>
         <Picture src={user.picture} alt={user.displayName} /> Hello, {user.displayName}
       </h2>
@@ -18,7 +20,8 @@ function Profile({ user }) {
           <li key={key}>{key}: {user[key].toString()}</li>
         ))}
       </ul>
-    </div>
+    </Jumbotron>
+    </Container>
   );
 }
 

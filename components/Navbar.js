@@ -1,43 +1,66 @@
 import Link from "next/link";
-import Container from "react-bootstrap/Container";
-import Navbar from "react-bootstrap/Navbar";
-import Nav from "react-bootstrap/Nav";
+import {Nav, Navbar, Button} from "react-bootstrap";
 
 export default function AppNavbar({ user }) {
-  const navbarStyle = { marginBottom: "25px"};
   return (
-    <Navbar bg="dark" variant="dark" expand="lg" style={navbarStyle}>
+    <Navbar sticky="top" variant="light" expand="lg" className='whiteBackground'>
       
-        <Navbar.Brand>
-          <Link href="/">
-            <a>Thoughts!</a>
+        <Navbar.Brand className='logo'>
+          <Link href="/" >
+            <a >Travel Share!</a>
           </Link>
         </Navbar.Brand>
-        <Navbar.Toggle aria-controls="basic-navbar-nav" />
+        <Navbar.Toggle aria-controls="basic-navbar-nav navbar-toggler-icon" className=''/>
         <Navbar.Collapse id="basic-navbar-nav">
-          <Nav className="mr-auto">
+          <Nav className="left-align">
             {user && (
               <>
+
+                <Link href="/about">
+                  <a className="nav-link black">About</a>
+                </Link>
+
                 <Link href="/share-thought">
-                  <a className="nav-link">New Thought</a>
+                  <a className="nav-link black">Share Must Do!</a>
                 </Link>
+
+                <Link href="/mustdos">
+                  <a className="nav-link black">Must Do's</a>
+                </Link>
+
+                <Link href="/map">
+                  <a className="nav-link black">Map</a>
+                </Link>
+
                 <Link href="/profile">
-                  <a className="nav-link">Profile</a>
+                  <a className="nav-link black">Profile</a>
                 </Link>
-                <Link href="/logout">
-                  <a className="nav-link">Log Out</a>
-                </Link>
+                {/* <Link href="/logout">
+                  <a className="nav-link black">Log Out</a>
+                </Link> */}
+                <Button className="nav-link" variant="danger" href="/logout">
+                  Log Out
+                </Button>
               </>
             )}
             {!user && (
-              <>
-              <Link href="/login">
-                <a className="nav-link">Log In</a>
-              </Link>
+              <>  
+            <Link href="/about">
+               <a className="nav-link black">About</a>
+            </Link>
 
             <Link href="/map">
-               <a className="nav-link">Map</a>
+               <a className="nav-link black">Map</a>
             </Link>
+
+            <Link href="/mustdos">
+               <a className="nav-link black">Must Do's</a>
+            </Link>
+
+            <Button className="nav-link" variant="primary" href="/login">
+              Log In
+            </Button>
+
               </>
             )}
           </Nav>

@@ -276,10 +276,10 @@ class map extends Component {
 
   render() {
      // var polygonSeries;
-     console.log('render 2')
-     console.log(this.state.selected)
+     //console.log('render 2')
+     //console.log(this.state.selected)
     return (
-      <Col>
+      <Col className='whiteBackgroud'>
         <Row>
           <div id="chartdiv" style={{ width: "100%", height: "500px", backgroundColor:'white' }}></div>
         </Row>

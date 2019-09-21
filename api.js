@@ -31,12 +31,14 @@ function ensureAuthenticated(req, res, next) {
 }
 
 router.post("/api/thoughts", ensureAuthenticated, (req, res) => {
+  console.log(req.body);
   const {
-    message
+    message, country
   } = req.body;
   const newThought = {
     _id: new Date().getTime(),
     message,
+    country,
     author: req.user.displayName
   };
   thoughts.push(newThought);
