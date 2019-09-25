@@ -12,6 +12,7 @@ function About(props) {
         <p>This are some tech used for this project:</p>
         <ul>
             <li><b>Conuntry information: </b>https://restcountries.eu/#api-endpoints-all</li>
+            <li><b>Conuntry list: </b>https://datahub.io/core/country-list</li>
             <li><b>Auth0: </b>for authentication.</li>
             <li><b>AmMaps: </b>for maps.</li>
         </ul>

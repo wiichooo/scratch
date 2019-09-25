@@ -5,6 +5,7 @@ import DatePicker from "react-datepicker";
 
 class DataForm extends Component {
     state = {
+        _id: null,
         id: this.props.id,
         name: this.props.name,
         visited: false,
@@ -21,7 +22,8 @@ class DataForm extends Component {
                 {color:'Orange',code:'rgb(245,166,35)'},
                 {color:'Yellow',code:'rgb(204,191,32)'},
                 {color:'Purple',code:'rgb(144,19,254)'}
-                ]
+                ],
+        edit: false
     };
     construtor(props) {
         this.submit = this.submit.bind(this)
@@ -31,15 +33,20 @@ class DataForm extends Component {
         this.getColor = this.getColor.bind(this)
     }
     static getDerivedStateFromProps(props, state) {
-        console.log(props.selected)
+        console.log(props)
+        console.log(state)
+        //if(props.selected._id)
         return state = {
             id: props.id,
             name: props.name,
-            visited: props.selected != undefined?props.selected.visited: props.id==state.id?state.visited: false,
-            wishlist: props.selected != undefined?props.selected.wishlist: props.id==state.id?state.wishlist: false,
+            visited: props.selected != undefined && !state.edit ? props.selected.visited: props.id==state.id?state.visited: false,
+            wishlist: props.selected != undefined && !state.edit ? props.selected.wishlist: props.id==state.id?state.wishlist: false,
             comment: props.selected != undefined?props.selected.comment: props.id==state.id?state.comment: '',
             color: props.selected != undefined ? state.colors.find(function(color){return color.code == props.selected.fill}).color : props.id==state.id ? state.color : 'Select a color',
-            startDate: props.selected != undefined ? new Date(props.selected.date)  : props.id==state.id ? state.startDate: new Date()
+            startDate: props.selected != undefined ? new Date(props.selected.date)  : props.id==state.id ? state.startDate: new Date(),
+            _id: props.selected != undefined ? props.selected._id : props.id==state.id?state._id: null,
+            edit: false
+            
         }
     }
     handleChange = date => {
@@ -75,7 +82,7 @@ class DataForm extends Component {
 
     submit() {
         this.props.onChange(this.props.id, this.props.name, this.state.visited,
-            this.state.wishlist, this.state.comment, this.state.startDate, this.state.fill);
+            this.state.wishlist, this.state.comment, this.state.startDate, this.state.fill, this.state._id);
     }
 
     render(){
@@ -84,8 +91,9 @@ class DataForm extends Component {
             
         <Container>
             <Col>
-            <Card border="primary" className='card-color'>
-                <Card.Header>Selected</Card.Header>
+            <Card border="primary" className={this.state._id ? 'card-color-visited':'card-color'}>
+                <Card.Header className={this.state.visited || this.state.wishlist?'card-color-visited-header':null}>
+                {this.state._id?'Saved':'Selected'}</Card.Header>
                 <Card.Body>
                 <Card.Title>Your info</Card.Title>
                 <Form.Group as={Row} controlId="formPlaintextEmail">
@@ -159,7 +167,7 @@ class DataForm extends Component {
                     }}/>
                     </Form.Group>
                     <Button className='saveButton' variant="primary"  onClick={() => this.submit()} style={{width:'100%'}}>
-                    Save!
+                    {this.state._id?'Update!':'Save!'}
                     </Button>
                 </Card.Body>
             </Card>

@@ -24,6 +24,8 @@ class map extends Component {
 
   }
   static getDerivedStateFromProps(props, state) {
+    console.log(state)
+    console.log(props)
     if (state.visited.length < props.visited.length) {
       var allIds = props.visited.map(function (d) {
         return (d.id)
@@ -172,9 +174,6 @@ class map extends Component {
   };
 
   changeSelected(id, name) {
-    console.log(this.state.data.find(function(element) {
-      return element.id==id;
-    }))
     fetch(`https://restcountries.eu/rest/v2/alpha/${id}`)
         .then(res => res.json())
         .then((data) => {
@@ -195,7 +194,7 @@ class map extends Component {
 
   };
 
-  setVisited(id, name, visited, wishlist, comment, date, fill) {
+  setVisited(id, name, visited, wishlist, comment, date, fill, _id) {
     let data1 = {
       "id": id,
       "name": name,
@@ -203,25 +202,18 @@ class map extends Component {
       "wishlist": wishlist,
       "comment": comment,
       "date": date,
-      "fill": fill
+      "fill": fill,
+      "_id": _id
     }
 
 
-    this.save(data1)
-
-    this.setState({
-      data: [data1, ...this.state.data],
-      visited: [id, ...this.state.visited],
-      id: '',
-      name: '',
-      map: true
-    });
+    this.save(data1, id)
 
   };
 
-  async save(data) {
+  async save(data, id) {
     //event.preventDefault();
-    await fetch("/api/visited", {
+    const response = await fetch("/api/visited", {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
@@ -229,6 +221,15 @@ class map extends Component {
       body: JSON.stringify({
         data
       })
+    })
+    let country = await response.json()
+    console.log(country.body)
+    this.setState({
+      data: [country.body, ...this.state.data],
+      visited: [id, ...this.state.visited],
+      id: '',
+      name: '',
+      map: true
     });
     //  Router.push("/");
   }
@@ -259,7 +260,7 @@ class map extends Component {
           this.changeSelected(ev.target.dataItem.dataContext.id,
             ev.target.dataItem.dataContext.name);
 
-          console.log(ev.target.dataItem.dataContext)
+          //console.log(ev.target.dataItem.dataContext)
           //selected(ev.target.dataItem.dataContext.name);
           lastSelected.isActive = false;
         }
@@ -269,6 +270,7 @@ class map extends Component {
         }
         //changeSelected(lastSelected);
       }, this)
+      console.log(this.state.data)
       visited.data = this.state.data
       polygonTemplate.propertyFields.fill = "fill";
     }
@@ -287,7 +289,7 @@ class map extends Component {
           {this.state.id ? 
           <>
             <DataForm id={this.state.id} name={this.state.name} selected={this.state.selected} onChange={this.setVisited}/>
-            <CountryInfo id={this.state.id} name={this.state.name} data={this.state.info} onChange={this.setVisited}/>
+            <CountryInfo id={this.state.id} name={this.state.name} data={this.state.info}/>
           </>
           :null}
         </Row>

@@ -49,9 +49,9 @@ export default function AppNavbar({ user }) {
                <a className="nav-link black">About</a>
             </Link>
 
-            <Link href="/map">
+            {/* <Link href="/map">
                <a className="nav-link black">Map</a>
-            </Link>
+            </Link> */}
 
             <Link href="/mustdos">
                <a className="nav-link black">Must Do's</a>

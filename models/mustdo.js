@@ -1,23 +1,20 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-  var ctry_visited = new Schema({
+  var mustdo = new Schema({
     _id:  mongoose.Schema.Types.ObjectId,
-    id: String,
+    country: String,
+    message: String,
     name: String,
-    visited: Boolean,
-    wishlist: Boolean,
-    comment: String,
-    date: Date,
-    fill: String,
+    flag: String,
     user: String,
     userid: String,
     date_inserted: { type: Date, default: Date.now }
   });
   
-  var Country = mongoose.model('visited', ctry_visited);
+  var MustDo = mongoose.model('mustdo', mustdo);
 
 
   //console.log(Country.create({_id:mongoose.Types.ObjectId(),id:"USA"}));
 
-  module.exports = Country;
+  module.exports = MustDo;
